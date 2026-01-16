@@ -1,10 +1,39 @@
-# A ball is again dropped from a tower of height h with initial velocity zero. 
-# Write a program that asks the user to enter the height in meters of the tower and then calculates and prints the time the ball takes until it hits the ground, ignoring air resistance. 
-# Use your program to calculate the time for a ball dropped from a 100 m high tower
+"""
+Dropped_ Ball _Calculator
+
+Calculates the time it takes for an object to fall from a specific height
+assuming zero initial velocity and negligible air resistance.
+"""
+
 import math
 
-g = 9.81
-h = float(input("Enter the height of the tower (meters): "))
-t = math.sqrt((2 * h) / g)
+# Constants
+# g: Acceleration due to gravity (m/s^2)
+GRAVITY = 9.81
 
-print(f"Time to hit the ground is {t:.2f} seconds")
+def calculate_fall_time(height_meters: float) -> float:
+   
+    # Calculates the time to hit the ground from a given height
+    
+    if height_meters < 0:
+        raise ValueError("Height cannot be negative.")
+
+    # Formula: t = sqrt(2h / g)
+    time_seconds = math.sqrt((2 * height_meters) / GRAVITY)
+    return time_seconds
+
+if __name__ == "__main__":
+    # Entry point for the script
+    print(" Free Fall Time Calculator ")
+    
+    try:
+        user_input = input("Enter the height of the tower (meters): ")
+        height = float(user_input)
+        
+        fall_time = calculate_fall_time(height)
+        
+        print(f"Time to impact: {fall_time:.2f} seconds")
+
+    except ValueError as e:
+        # To handle both non-numeric inputs and negative heights
+        print(f"Input Error: {e}")
